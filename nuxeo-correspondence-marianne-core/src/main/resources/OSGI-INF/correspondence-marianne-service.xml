@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<component name="com.nuxeo.correspondence.marianne.service">
+
+  <documentation>
+    @author
+    <a href="mailto:nu@nuxeo.com">Nicolas Ulrich</a>
+  </documentation>
+
+  <implementation
+    class="org.nuxeo.correspondence.marianne.service.MarianneServiceImpl" />
+
+  <service>
+    <provide interface="org.nuxeo.correspondence.marianne.service.MarianneService" />
+  </service>
+
+</component>

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 1
+Bundle-Name: Nuxeo Correspondence Marianne Core
+Bundle-SymbolicName: com.nuxeo.correspondence.marianne.core;singleton=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Nuxeo
+Require-Bundle: com.nuxeo.correspondence.marianne.api
+Nuxeo-Component: OSGI-INF/correspondence-marianne-service.xml
