@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<component name="org.nuxeo.correspondence.marianne.test">
+
+  <extension target="org.nuxeo.correspondence.marianneService"
+    point="limitDate">
+
+    <limitDate>
+      <label>courriel</label>
+      <numberOfDays>5</numberOfDays>
+    </limitDate>
+
+  </extension>
+
+  <extension target="org.nuxeo.correspondence.marianne.checker.csv"
+    point="configuration">
+
+    <csvFile>
+      <path>holidays.csv</path>
+      <embended>true</embended>
+    </csvFile>
+
+  </extension>
+
+</component>

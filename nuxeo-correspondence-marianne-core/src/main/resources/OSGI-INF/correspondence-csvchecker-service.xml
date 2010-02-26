@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.correspondence.marianne.checker.csv">
+
+  <implementation
+    class="org.nuxeo.correspondence.marianne.checker.CSVHolidaysChecker" />
+
+  <extension-point name="configuration">
+
+    <object
+      class="org.nuxeo.correspondence.marianne.checker.CSVConfigurationDescriptor" />
+
+  </extension-point>
+  
+</component>

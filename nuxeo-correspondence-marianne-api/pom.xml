@@ -12,6 +12,6 @@
 
   <groupId>org.nuxeo.ecm.platform</groupId>
   <artifactId>nuxeo-correspondence-marianne-api</artifactId>
-  <name>Correspondence Marianne Api</name>
-  <description>Correspondence Marianne Api</description>
+  <name>Nuxeo Correspondence Marianne Api</name>
+  <description>Nuxeo Correspondence Marianne Api</description>
 </project>

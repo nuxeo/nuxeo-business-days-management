@@ -16,27 +16,18 @@
  *
  */
 
-package org.nuxeo.correspondence.marianne.service;
+package org.nuxeo.correspondence.marianne.checker;
 
 import java.util.Date;
 
-/**
- * @author Nicolas Ulrich
- *
- */
-public interface MarianneService {
+public interface MarianneHolidaysChecker {
 
     /**
-     * <p>
-     * Return the limit date for the given label. The labels are declared using
-     * the extension point "limitDate" of the component
-     * "org.nuxeo.correspondence.marianneService".
-     * </p>
+     * Check if this day is an holiday.
      *
-     * @param label
-     * @param from
-     * @return Return the limit date. If the label is unknow, return null.
+     * @param date to check
+     * @return true if the given day is an holiday
      */
-    Date getLimitDate(String label, Date from);
+    public boolean isHoliday(Date date);
 
 }
