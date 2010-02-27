@@ -41,11 +41,11 @@ public class MarianneServiceImpl extends DefaultComponent implements
 
     public Date getLimitDate(String label, Date from) {
 
-        Integer days = values.get(label);
-
-        if (days == null) {
+        if(!values.containsKey(label)){
             return null;
         }
+
+        int duration = values.get(label);
 
         Calendar fromCalendar = GregorianCalendar.getInstance();
         fromCalendar.setTime(from);
@@ -53,13 +53,13 @@ public class MarianneServiceImpl extends DefaultComponent implements
         fromCalendar.clear(Calendar.MINUTE);
         fromCalendar.clear(Calendar.MILLISECOND);
 
-        for (int i = 0; i < days; i++) {
+        for (int i = 0; i < duration; i++) {
 
-            fromCalendar.roll(Calendar.DATE, true);
+            fromCalendar.add(Calendar.DAY_OF_YEAR, 1);
 
             // If this is a non working day, increase the limit
             if (isHolidayDay(fromCalendar)) {
-                days++;
+                duration++;
             }
 
         }
@@ -83,16 +83,16 @@ public class MarianneServiceImpl extends DefaultComponent implements
             String extensionPoint, ComponentInstance contributor)
             throws Exception {
 
-        if (extensionPoint.equals("limitDate")) {
+        if (extensionPoint.equals("duration")) {
 
-            LimitDateDescriptor distributionType = ((LimitDateDescriptor) contribution);
-            values.put(distributionType.label, distributionType.numberOfDays);
+            DurationDescriptor duration = ((DurationDescriptor) contribution);
+            values.put(duration.label, duration.numberOfDays);
 
         } else if (extensionPoint.equals("holidaysChecker")) {
 
-            HolidaysCheckDescriptor distributionType = ((HolidaysCheckDescriptor) contribution);
+            HolidaysCheckerDescriptor distributionType = ((HolidaysCheckerDescriptor) contribution);
             check = (MarianneHolidaysChecker) Class.forName(
-                    distributionType.name).newInstance();
+                    distributionType.clazz).newInstance();
 
         }
 
@@ -102,8 +102,12 @@ public class MarianneServiceImpl extends DefaultComponent implements
     public void unregisterContribution(Object contribution,
             String extensionPoint, ComponentInstance contributor) {
 
-        LimitDateDescriptor distributionType = ((LimitDateDescriptor) contribution);
-        values.remove(distributionType.label);
+        if (extensionPoint.equals("duration")) {
+
+            DurationDescriptor duration = ((DurationDescriptor) contribution);
+            values.remove(duration);
+
+        }
 
     }
 

@@ -24,6 +24,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,9 +37,10 @@ import org.nuxeo.runtime.model.ComponentInstance;
 import org.nuxeo.runtime.model.DefaultComponent;
 
 /**
- * Holidays checker implementation which load the holidays dates in a CVS file.
- * The extension point "" of the component "" allows to specify where is located
- * the CSV file.
+ * Holidays checker implementation which loads the holidays dates in a CVS file.
+ * The extension point "configuration" of the component
+ * "org.nuxeo.correspondence.marianne.checker.csv" allows to specify where is
+ * located the CSV file.
  *
  * @author Nicolas Ulrich
  *
@@ -51,63 +53,53 @@ public class CSVHolidaysChecker extends DefaultComponent implements
     private static final SimpleDateFormat formater = new SimpleDateFormat(
             "dd/MM/yyyy");
 
-    private static String cvsFileName;
+    private static Set<Date> dates = new HashSet<Date>();
 
-    private static boolean cvsFileInJar;
-
-    private static Set<Date> dates;
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.nuxeo.correspondence.marianne.service.checker.MarianneHolidaysChecker
-     * #isHoliday(java.util.Date)
-     */
     public boolean isHoliday(Date date) {
-        return getDates().contains(date);
+        return dates.contains(date);
     }
 
     /**
-     * Read the CVS file in order to load hollidays.
-     *
-     * @return list of dates contained in the csv file.
+     * Read the CVS file in order to load hollidays.cvs
      */
-    private Set<Date> getDates() {
+    private void initDates(String fileName, boolean isEmbedded) {
 
-        if (dates == null) {
-
-            dates = new HashSet<Date>();
-
-            try {
-
-                BufferedReader buffer = null;
-
-                if (cvsFileInJar) {
-                    InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                            cvsFileName);
-
-                    buffer = new BufferedReader(new InputStreamReader(is));
-                } else {
-                    buffer = new BufferedReader(new FileReader(cvsFileName));
-                }
-
-                String line;
-                while ((line = buffer.readLine()) != null) {
-                    dates.add(formater.parse(line));
-                }
-
-            } catch (FileNotFoundException e) {
-                log.error("Unable to find the CSV file", e);
-            } catch (IOException e) {
-                log.error("Unable to read the CSV file", e);
-            } catch (ParseException e) {
-                log.error("The CSV file is not formatted", e);
-            }
-
+        if (fileName == null) {
+            return;
         }
 
-        return dates;
+        try {
+
+            Reader reader = null;
+
+            if (isEmbedded) {
+                InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(
+                        fileName);
+                reader = new InputStreamReader(is);
+            } else {
+                reader = new FileReader(fileName);
+            }
+
+            if (reader == null) {
+                log.error("Unable to read the CSV file");
+                return;
+            }
+
+            BufferedReader buffer = new BufferedReader(reader);
+
+            String line;
+            while ((line = buffer.readLine()) != null) {
+                dates.add(formater.parse(line));
+            }
+
+        } catch (FileNotFoundException e) {
+            log.error("Unable to find the CSV file", e);
+        } catch (IOException e) {
+            log.error("Unable to read the CSV file", e);
+        } catch (ParseException e) {
+            log.error("The CSV file is not formatted", e);
+        }
+
     }
 
     @Override
@@ -118,8 +110,8 @@ public class CSVHolidaysChecker extends DefaultComponent implements
         if (extensionPoint.equals("configuration")) {
 
             CSVConfigurationDescriptor conf = ((CSVConfigurationDescriptor) contribution);
-            cvsFileName = conf.csvFilePath;
-            cvsFileInJar = conf.embended;
+            initDates(conf.csvFilePath, conf.embedded);
+
         }
 
     }

@@ -21,8 +21,8 @@ package org.nuxeo.correspondence.marianne.service;
 import org.nuxeo.common.xmap.annotation.XNode;
 import org.nuxeo.common.xmap.annotation.XObject;
 
-@XObject("limitDate")
-public class LimitDateDescriptor {
+@XObject("duration")
+public class DurationDescriptor {
 
     @XNode("label")
     protected String label;

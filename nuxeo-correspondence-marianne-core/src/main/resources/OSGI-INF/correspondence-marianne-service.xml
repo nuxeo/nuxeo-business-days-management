@@ -2,6 +2,9 @@
 <component name="org.nuxeo.correspondence.marianneService">
 
   <documentation>
+
+    Used to configure the Marianne Service.
+
     @author
     <a href="mailto:nu@nuxeo.com">Nicolas Ulrich</a>
   </documentation>
@@ -13,25 +16,41 @@
     <provide interface="org.nuxeo.correspondence.marianne.service.MarianneService" />
   </service>
 
-  <extension-point name="limitDate">
+  <extension-point name="duration">
 
     <documentation>
-      Used to register new limit date
+
+      Used to register new durations.
+
+      <code>
+        <duration>
+          <label>mail</label>
+          <numberOfDays>5</numberOfDays>
+        </duration>
+      </code>
+
     </documentation>
 
     <object
-      class="org.nuxeo.correspondence.marianne.service.LimitDateDescriptor" />
+      class="org.nuxeo.correspondence.marianne.service.DurationDescriptor" />
 
   </extension-point>
-  
+
   <extension-point name="holidaysChecker">
 
     <documentation>
-      Used to register Holiday Check
+
+      Used to register Holiday Checker
+
+      <code>
+        <holidaysChecker
+          class="org.nuxeo.correspondence.marianne.checker.CSVHolidaysChecker" />
+      </code>
+
     </documentation>
 
     <object
-      class="org.nuxeo.correspondence.marianne.service.HolidaysCheckDescriptor" />
+      class="org.nuxeo.correspondence.marianne.service.HolidaysCheckerDescriptor" />
 
   </extension-point>
 

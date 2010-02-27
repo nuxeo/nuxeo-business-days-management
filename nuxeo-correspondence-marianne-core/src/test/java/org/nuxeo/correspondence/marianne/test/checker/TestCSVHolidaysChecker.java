@@ -16,7 +16,7 @@
  *
  */
 
-package org.nuxeo.correspondence.marianne.test.service;
+package org.nuxeo.correspondence.marianne.test.checker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

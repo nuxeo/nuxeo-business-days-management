@@ -5,10 +5,8 @@
   <extension target="org.nuxeo.correspondence.marianneService"
     point="holidaysChecker">
 
-    <holidaysChecker>
-      <name>org.nuxeo.correspondence.marianne.checker.CSVHolidaysChecker
-      </name>
-    </holidaysChecker>
+    <holidaysChecker
+      class="org.nuxeo.correspondence.marianne.checker.CSVHolidaysChecker" />
 
   </extension>
 

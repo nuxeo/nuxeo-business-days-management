@@ -3,12 +3,12 @@
 <component name="org.nuxeo.correspondence.marianne.test">
 
   <extension target="org.nuxeo.correspondence.marianneService"
-    point="limitDate">
+    point="duration">
 
-    <limitDate>
+    <duration>
       <label>courriel</label>
       <numberOfDays>5</numberOfDays>
-    </limitDate>
+    </duration>
 
   </extension>
 
@@ -17,7 +17,7 @@
 
     <csvFile>
       <path>holidays.csv</path>
-      <embended>true</embended>
+      <embedded>true</embedded>
     </csvFile>
 
   </extension>

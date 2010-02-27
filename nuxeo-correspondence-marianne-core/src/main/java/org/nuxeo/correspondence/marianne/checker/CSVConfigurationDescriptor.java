@@ -27,7 +27,7 @@ public class CSVConfigurationDescriptor {
     @XNode("path")
     protected String csvFilePath;
 
-    @XNode("embended")
-    protected boolean embended;
+    @XNode("embedded")
+    protected boolean embedded;
 
 }

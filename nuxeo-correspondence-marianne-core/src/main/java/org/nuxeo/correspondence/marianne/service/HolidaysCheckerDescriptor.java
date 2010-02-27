@@ -22,9 +22,9 @@ import org.nuxeo.common.xmap.annotation.XNode;
 import org.nuxeo.common.xmap.annotation.XObject;
 
 @XObject("holidaysChecker")
-public class HolidaysCheckDescriptor {
+public class HolidaysCheckerDescriptor {
 
-    @XNode("name")
-    protected String name;
+    @XNode("@class")
+    protected String clazz;
 
 }

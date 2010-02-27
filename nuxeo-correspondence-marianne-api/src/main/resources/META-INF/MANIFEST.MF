@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 1
+Bundle-ManifestVersion: 2
 Bundle-Name: Nuxeo Correspondence Marianne API
 Bundle-SymbolicName: org.nuxeo.correspondence.marianne.api;singleton=true
-Bundle-Version: 1.0.0
 Bundle-Vendor: Nuxeo
