@@ -33,7 +33,7 @@ import org.nuxeo.runtime.model.DefaultComponent;
  *
  */
 public class MarianneServiceImpl extends DefaultComponent implements
-        MarianneService {
+MarianneService {
 
     private final Map<String, Integer> values = new HashMap<String, Integer>();
 
@@ -49,9 +49,10 @@ public class MarianneServiceImpl extends DefaultComponent implements
 
         Calendar fromCalendar = GregorianCalendar.getInstance();
         fromCalendar.setTime(from);
-        fromCalendar.clear(Calendar.HOUR);
-        fromCalendar.clear(Calendar.MINUTE);
-        fromCalendar.clear(Calendar.MILLISECOND);
+        fromCalendar.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
+        fromCalendar.set(Calendar.MINUTE, 0);                 // set minute in hour
+        fromCalendar.set(Calendar.SECOND, 0);                 // set second in minute
+        fromCalendar.set(Calendar.MILLISECOND, 0);
 
         for (int i = 0; i < duration; i++) {
 
@@ -68,7 +69,6 @@ public class MarianneServiceImpl extends DefaultComponent implements
     }
 
     private boolean isHolidayDay(Calendar day) {
-
         if (day.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
                 || day.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
                 || (check != null && check.isHoliday(day.getTime())))
@@ -81,7 +81,7 @@ public class MarianneServiceImpl extends DefaultComponent implements
     @Override
     public void registerContribution(Object contribution,
             String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    throws Exception {
 
         if (extensionPoint.equals("duration")) {
 

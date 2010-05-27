@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -41,17 +42,17 @@ import org.nuxeo.runtime.model.DefaultComponent;
  * The extension point "configuration" of the component
  * "org.nuxeo.correspondence.marianne.checker.csv" allows to specify where is
  * located the CSV file.
- *
+ * 
  * @author Nicolas Ulrich
- *
+ * 
  */
 public class CSVHolidaysChecker extends DefaultComponent implements
-        MarianneHolidaysChecker {
+MarianneHolidaysChecker {
 
     private static final Log log = LogFactory.getLog(CSVHolidaysChecker.class);
 
     private static final SimpleDateFormat formater = new SimpleDateFormat(
-            "dd/MM/yyyy");
+    "dd/MM/yyyy");
 
     private static Set<Date> dates = new HashSet<Date>();
 
@@ -105,7 +106,7 @@ public class CSVHolidaysChecker extends DefaultComponent implements
     @Override
     public void registerContribution(Object contribution,
             String extensionPoint, ComponentInstance contributor)
-            throws Exception {
+    throws Exception {
 
         if (extensionPoint.equals("configuration")) {
 
@@ -113,7 +114,6 @@ public class CSVHolidaysChecker extends DefaultComponent implements
             initDates(conf.csvFilePath, conf.embedded);
 
         }
-
     }
 
 }
