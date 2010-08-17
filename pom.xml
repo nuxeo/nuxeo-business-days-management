@@ -6,20 +6,15 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.3.2-SNAPSHOT</version>
+    <version>5.4.0-SNAPSHOT</version>
   </parent>
 
   <groupId>org.nuxeo.ecm.platform</groupId>
   <artifactId>nuxeo-correspondence-marianne</artifactId>
-  <version>5.3.2-SNAPSHOT</version>
   <name>Nuxeo Correspondence Marianne</name>
   <packaging>pom</packaging>
   <description/>
 
-  <properties>
-    <pom.version>5.3.2-SNAPSHOT</pom.version>
-  </properties>
-  
   <developers>
     <developer>
       <name>Nicolas Ulrich</name>
@@ -37,7 +32,7 @@
       <dependency>
         <groupId>org.nuxeo.ecm.platform</groupId>
         <artifactId>nuxeo-correspondence-marianne-api</artifactId>
-        <version>${pom.version}</version>
+        <version>${nuxeo.features.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
