@@ -22,6 +22,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import org.nuxeo.correspondence.marianne.service.MarianneService;
 import org.nuxeo.runtime.api.Framework;
 import org.nuxeo.runtime.test.NXRuntimeTestCase;
@@ -32,7 +36,7 @@ import org.nuxeo.runtime.test.NXRuntimeTestCase;
  */
 public class TestMarianneService extends NXRuntimeTestCase {
 
-    @Override
+    @Before
     public void setUp() throws Exception {
 
         super.setUp();
@@ -43,6 +47,7 @@ public class TestMarianneService extends NXRuntimeTestCase {
 
     }
 
+    @Test
     public void testLabel() {
 
         MarianneService ms = Framework.getLocalService(MarianneService.class);
@@ -58,6 +63,7 @@ public class TestMarianneService extends NXRuntimeTestCase {
     /**
      * Test a full week
      */
+    @Test
     public void testLimiteDate() {
 
         assertEquals(8, getLimit(1));

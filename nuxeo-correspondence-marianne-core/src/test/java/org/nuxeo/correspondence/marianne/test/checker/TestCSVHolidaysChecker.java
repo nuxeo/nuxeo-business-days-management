@@ -21,6 +21,10 @@ package org.nuxeo.correspondence.marianne.test.checker;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import org.nuxeo.correspondence.marianne.checker.CSVHolidaysChecker;
 import org.nuxeo.runtime.test.NXRuntimeTestCase;
 
@@ -30,7 +34,7 @@ import org.nuxeo.runtime.test.NXRuntimeTestCase;
  */
 public class TestCSVHolidaysChecker extends NXRuntimeTestCase {
 
-    @Override
+    @Before
     public void setUp() throws Exception {
 
         super.setUp();
@@ -41,6 +45,7 @@ public class TestCSVHolidaysChecker extends NXRuntimeTestCase {
 
     }
 
+    @Test
     public void testLabel() throws ParseException {
 
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
