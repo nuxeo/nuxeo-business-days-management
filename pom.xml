@@ -32,14 +32,4 @@
     <module>nuxeo-correspondence-marianne-core</module>
   </modules>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.nuxeo.ecm.platform</groupId>
-        <artifactId>nuxeo-correspondence-marianne-api</artifactId>
-        <version>${pom.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
 </project>
