@@ -1,10 +1,24 @@
-syntax:glob
+# common ignores
 .classpath
 .project
 .settings
+.idea
 bin
-build.properties
+pojo-bin
 target
 *~
+*~bak
+*-bak
+*.bak
+*-new
+*.rej
 *.orig
-.svn
+.DS_Store
+.pydevproject
+*.pyc
+*.iml
+*.ipr
+*.iws
+*.gpd.*
+*cpJar*
+dependency-tree.log
