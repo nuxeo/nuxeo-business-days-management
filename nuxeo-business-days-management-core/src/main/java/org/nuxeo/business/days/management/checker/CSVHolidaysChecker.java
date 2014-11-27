@@ -43,9 +43,9 @@ import org.nuxeo.runtime.model.DefaultComponent;
  * The extension point "configuration" of the component
  * "org.nuxeo.business.days.management.checker.csv" allows to specify where is
  * located the CSV file.
- * 
+ *
  * @author Nicolas Ulrich
- * 
+ *
  */
 public class CSVHolidaysChecker extends DefaultComponent implements
 HolidaysChecker {
@@ -106,8 +106,7 @@ HolidaysChecker {
 
     @Override
     public void registerContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor)
-    throws Exception {
+            String extensionPoint, ComponentInstance contributor) {
 
         if (extensionPoint.equals("configuration")) {
 

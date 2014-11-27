@@ -81,8 +81,7 @@ BusinessDaysService {
 
     @Override
     public void registerContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor)
-    throws Exception {
+            String extensionPoint, ComponentInstance contributor) {
 
         if (extensionPoint.equals("duration")) {
 
@@ -92,8 +91,12 @@ BusinessDaysService {
         } else if (extensionPoint.equals("holidaysChecker")) {
 
             HolidaysCheckerDescriptor distributionType = ((HolidaysCheckerDescriptor) contribution);
-            check = (HolidaysChecker) Class.forName(
-                    distributionType.clazz).newInstance();
+            try {
+                check = (HolidaysChecker) Class.forName(
+                        distributionType.clazz).newInstance();
+            } catch (ReflectiveOperationException e) {
+                throw new RuntimeException(e);
+            }
 
         }
 
