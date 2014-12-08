@@ -22,15 +22,13 @@ import java.util.Date;
 
 /**
  * @author Nicolas Ulrich
- *
  */
 public interface BusinessDaysService {
 
     /**
      * <p>
-     * Return the limit date for the given label. The labels are declared using
-     * the extension point "limitDate" of the component
-     * "org.nuxeo.business.days.management.BusinessDaysService".
+     * Return the limit date for the given label. The labels are declared using the extension point "limitDate" of the
+     * component "org.nuxeo.business.days.management.BusinessDaysService".
      * </p>
      *
      * @param label

@@ -31,10 +31,8 @@ import org.nuxeo.runtime.model.DefaultComponent;
 
 /**
  * @author Nicolas Ulrich
- *
  */
-public class BusinessDaysServiceImpl extends DefaultComponent implements
-BusinessDaysService {
+public class BusinessDaysServiceImpl extends DefaultComponent implements BusinessDaysService {
 
     private final Map<String, Integer> values = new HashMap<String, Integer>();
 
@@ -42,7 +40,7 @@ BusinessDaysService {
 
     public Date getLimitDate(String label, Date from) {
 
-        if(!values.containsKey(label)){
+        if (!values.containsKey(label)) {
             return null;
         }
 
@@ -50,9 +48,9 @@ BusinessDaysService {
 
         Calendar fromCalendar = GregorianCalendar.getInstance();
         fromCalendar.setTime(from);
-        fromCalendar.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
-        fromCalendar.set(Calendar.MINUTE, 0);                 // set minute in hour
-        fromCalendar.set(Calendar.SECOND, 0);                 // set second in minute
+        fromCalendar.set(Calendar.HOUR_OF_DAY, 0); // set hour to midnight
+        fromCalendar.set(Calendar.MINUTE, 0); // set minute in hour
+        fromCalendar.set(Calendar.SECOND, 0); // set second in minute
         fromCalendar.set(Calendar.MILLISECOND, 0);
 
         for (int i = 0; i < duration; i++) {
@@ -70,8 +68,7 @@ BusinessDaysService {
     }
 
     private boolean isHolidayDay(Calendar day) {
-        if (day.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
-                || day.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+        if (day.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || day.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
                 || (check != null && check.isHoliday(day.getTime())))
             return true;
 
@@ -80,8 +77,7 @@ BusinessDaysService {
     }
 
     @Override
-    public void registerContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor) {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
 
         if (extensionPoint.equals("duration")) {
 
@@ -92,8 +88,7 @@ BusinessDaysService {
 
             HolidaysCheckerDescriptor distributionType = ((HolidaysCheckerDescriptor) contribution);
             try {
-                check = (HolidaysChecker) Class.forName(
-                        distributionType.clazz).newInstance();
+                check = (HolidaysChecker) Class.forName(distributionType.clazz).newInstance();
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
@@ -103,8 +98,7 @@ BusinessDaysService {
     }
 
     @Override
-    public void unregisterContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor) {
+    public void unregisterContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
 
         if (extensionPoint.equals("duration")) {
 

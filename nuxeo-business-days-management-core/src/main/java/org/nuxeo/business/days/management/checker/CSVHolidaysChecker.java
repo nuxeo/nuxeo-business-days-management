@@ -39,21 +39,16 @@ import org.nuxeo.runtime.model.ComponentInstance;
 import org.nuxeo.runtime.model.DefaultComponent;
 
 /**
- * Holidays checker implementation which loads the holidays dates in a CVS file.
- * The extension point "configuration" of the component
- * "org.nuxeo.business.days.management.checker.csv" allows to specify where is
- * located the CSV file.
+ * Holidays checker implementation which loads the holidays dates in a CVS file. The extension point "configuration" of
+ * the component "org.nuxeo.business.days.management.checker.csv" allows to specify where is located the CSV file.
  *
  * @author Nicolas Ulrich
- *
  */
-public class CSVHolidaysChecker extends DefaultComponent implements
-HolidaysChecker {
+public class CSVHolidaysChecker extends DefaultComponent implements HolidaysChecker {
 
     private static final Log log = LogFactory.getLog(CSVHolidaysChecker.class);
 
-    private static final SimpleDateFormat formater = new SimpleDateFormat(
-    "dd/MM/yyyy");
+    private static final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
 
     private static Set<Date> dates = new HashSet<Date>();
 
@@ -75,8 +70,7 @@ HolidaysChecker {
             Reader reader = null;
 
             if (isEmbedded) {
-                InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        fileName);
+                InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
                 reader = new InputStreamReader(is);
             } else {
                 reader = new FileReader(fileName);
@@ -105,8 +99,7 @@ HolidaysChecker {
     }
 
     @Override
-    public void registerContribution(Object contribution,
-            String extensionPoint, ComponentInstance contributor) {
+    public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
 
         if (extensionPoint.equals("configuration")) {
 

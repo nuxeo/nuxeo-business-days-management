@@ -31,7 +31,6 @@ import org.nuxeo.runtime.test.NXRuntimeTestCase;
 
 /**
  * @author Nicolas Ulrich
- *
  */
 public class TestCSVHolidaysChecker extends NXRuntimeTestCase {
 
