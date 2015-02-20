@@ -11,7 +11,7 @@
   <artifactId>nuxeo-business-days-management</artifactId>
   <name>Nuxeo Business Days Management</name>
   <packaging>pom</packaging>
-  <description></description>
+  <description>Management of business days</description>
 
   <developers>
     <developer>
@@ -23,6 +23,7 @@
   <modules>
     <module>nuxeo-business-days-management-api</module>
     <module>nuxeo-business-days-management-core</module>
+    <module>nuxeo-business-days-management-mp</module>
   </modules>
 
   <dependencyManagement>
@@ -30,6 +31,16 @@
       <dependency>
         <groupId>org.nuxeo.ecm.platform</groupId>
         <artifactId>nuxeo-business-days-management-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+	<dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-business-days-management-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+	<dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-business-days-management-mp</artifactId>
         <version>${project.version}</version>
       </dependency>
     </dependencies>
