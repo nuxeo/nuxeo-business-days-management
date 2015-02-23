@@ -23,7 +23,6 @@
   <modules>
     <module>nuxeo-business-days-management-api</module>
     <module>nuxeo-business-days-management-core</module>
-    <module>nuxeo-business-days-management-mp</module>
   </modules>
 
   <dependencyManagement>
