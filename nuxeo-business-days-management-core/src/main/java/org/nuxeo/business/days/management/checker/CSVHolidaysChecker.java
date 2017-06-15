@@ -28,15 +28,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.nuxeo.business.days.management.checker.HolidaysChecker;
 import org.nuxeo.runtime.model.ComponentInstance;
 import org.nuxeo.runtime.model.DefaultComponent;
 
@@ -50,7 +48,7 @@ public class CSVHolidaysChecker extends DefaultComponent implements HolidaysChec
 
     private static final Log log = LogFactory.getLog(CSVHolidaysChecker.class);
 
-    private static final SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+    private static final FastDateFormat formater = FastDateFormat.getInstance("dd/MM/yyyy");
 
     private static Set<Date> dates = new HashSet<Date>();
 
@@ -76,11 +74,6 @@ public class CSVHolidaysChecker extends DefaultComponent implements HolidaysChec
                 reader = new InputStreamReader(is);
             } else {
                 reader = new FileReader(fileName);
-            }
-
-            if (reader == null) {
-                log.error("Unable to read the CSV file");
-                return;
             }
 
             BufferedReader buffer = new BufferedReader(reader);

@@ -25,6 +25,10 @@
       <groupId>org.nuxeo.ecm.platform</groupId>
       <artifactId>nuxeo-business-days-management-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.nuxeo.runtime</groupId>
