@@ -20,14 +20,14 @@
 
 package org.nuxeo.business.days.management.test.checker;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import java.text.ParseException;
+
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 import org.nuxeo.business.days.management.checker.CSVHolidaysChecker;
 import org.nuxeo.runtime.test.NXRuntimeTestCase;
 
@@ -50,7 +50,7 @@ public class TestCSVHolidaysChecker extends NXRuntimeTestCase {
     @Test
     public void testLabel() throws ParseException {
 
-        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+        FastDateFormat formater = FastDateFormat.getInstance("dd/MM/yyyy");
 
         CSVHolidaysChecker check = new CSVHolidaysChecker();
         assertTrue(check.isHoliday(formater.parse("12/01/2010")));
