@@ -51,7 +51,7 @@ public class TestBusinessDaysService extends NXRuntimeTestCase {
     @Test
     public void testLabel() {
 
-        BusinessDaysService ms = Framework.getLocalService(BusinessDaysService.class);
+        BusinessDaysService ms = Framework.getService(BusinessDaysService.class);
         assertNotNull(ms);
 
         Date currentdate = GregorianCalendar.getInstance().getTime();
@@ -84,7 +84,7 @@ public class TestBusinessDaysService extends NXRuntimeTestCase {
      */
     private int getLimit(int dayOfMonth) {
 
-        BusinessDaysService ms = Framework.getLocalService(BusinessDaysService.class);
+        BusinessDaysService ms = Framework.getService(BusinessDaysService.class);
 
         Calendar startCalendar = GregorianCalendar.getInstance();
         startCalendar.set(2010, Calendar.JANUARY, dayOfMonth, 0, 0, 0);
