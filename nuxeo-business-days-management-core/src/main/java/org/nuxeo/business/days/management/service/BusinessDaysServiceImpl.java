@@ -105,7 +105,7 @@ public class BusinessDaysServiceImpl extends DefaultComponent implements Busines
         if (extensionPoint.equals("duration")) {
 
             DurationDescriptor duration = ((DurationDescriptor) contribution);
-            values.remove(duration);
+            values.remove(duration.label);
 
         }
 
