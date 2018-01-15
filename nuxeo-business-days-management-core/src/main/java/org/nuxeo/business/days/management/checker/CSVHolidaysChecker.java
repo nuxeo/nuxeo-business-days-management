@@ -21,7 +21,6 @@
 package org.nuxeo.business.days.management.checker;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,32 +64,28 @@ public class CSVHolidaysChecker extends DefaultComponent implements HolidaysChec
             return;
         }
 
-        try {
-
-            Reader reader = null;
-
-            if (isEmbedded) {
-                InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-                reader = new InputStreamReader(is);
-            } else {
-                reader = new FileReader(fileName);
-            }
-
-            BufferedReader buffer = new BufferedReader(reader);
+        try (BufferedReader buffer = new BufferedReader(getReader(fileName, isEmbedded))) {
 
             String line;
             while ((line = buffer.readLine()) != null) {
                 dates.add(formater.parse(line));
             }
 
-        } catch (FileNotFoundException e) {
-            log.error("Unable to find the CSV file", e);
         } catch (IOException e) {
             log.error("Unable to read the CSV file", e);
         } catch (ParseException e) {
             log.error("The CSV file is not formatted", e);
         }
 
+    }
+
+    protected Reader getReader(String fileName, boolean isEmbedded) throws IOException {
+        if (isEmbedded) {
+            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+            return new InputStreamReader(is);
+        } else {
+            return new FileReader(fileName);
+        }
     }
 
     @Override
