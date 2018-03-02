@@ -20,45 +20,43 @@
 
 package org.nuxeo.business.days.management.test.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import javax.inject.Inject;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.nuxeo.business.days.management.service.BusinessDaysService;
 import org.nuxeo.runtime.api.Framework;
-import org.nuxeo.runtime.test.NXRuntimeTestCase;
+import org.nuxeo.runtime.test.runner.Deploy;
+import org.nuxeo.runtime.test.runner.Features;
+import org.nuxeo.runtime.test.runner.FeaturesRunner;
+import org.nuxeo.runtime.test.runner.RuntimeFeature;
 
 /**
  * @author Nicolas Ulrich
  */
-public class TestBusinessDaysService extends NXRuntimeTestCase {
+@RunWith(FeaturesRunner.class)
+@Features(RuntimeFeature.class)
+@Deploy("org.nuxeo.business.days.management.api")
+@Deploy("org.nuxeo.business.days.management.core")
+@Deploy("org.nuxeo.business.days.management.core.test")
+public class TestBusinessDaysService {
 
-    @Before
-    public void setUp() throws Exception {
-
-        super.setUp();
-
-        deployBundle("org.nuxeo.business.days.management.api");
-        deployBundle("org.nuxeo.business.days.management.core");
-        deployBundle("org.nuxeo.business.days.management.core.test");
-
-    }
-
+    @Inject
+    protected BusinessDaysService ms;
+    
     @Test
     public void testLabel() {
-
-        BusinessDaysService ms = Framework.getService(BusinessDaysService.class);
-        assertNotNull(ms);
-
         Date currentdate = GregorianCalendar.getInstance().getTime();
-
         assertNotNull(ms.getLimitDate("courriel", currentdate));
         assertNull(ms.getLimitDate("fakeLabel", currentdate));
-
     }
 
     /**
@@ -66,7 +64,6 @@ public class TestBusinessDaysService extends NXRuntimeTestCase {
      */
     @Test
     public void testLimiteDate() {
-
         assertEquals(8, getLimit(1));
         assertEquals(8, getLimit(2));
         assertEquals(8, getLimit(3));
@@ -75,7 +72,6 @@ public class TestBusinessDaysService extends NXRuntimeTestCase {
         assertEquals(15, getLimit(6));
         assertEquals(18, getLimit(7));
         assertEquals(19, getLimit(8));
-
     }
 
     /**
@@ -83,18 +79,11 @@ public class TestBusinessDaysService extends NXRuntimeTestCase {
      * @return
      */
     private int getLimit(int dayOfMonth) {
-
-        BusinessDaysService ms = Framework.getService(BusinessDaysService.class);
-
         Calendar startCalendar = GregorianCalendar.getInstance();
         startCalendar.set(2010, Calendar.JANUARY, dayOfMonth, 0, 0, 0);
-
         Date limitDate = ms.getLimitDate("courriel", startCalendar.getTime());
-
         Calendar limitCalendar = GregorianCalendar.getInstance();
         limitCalendar.setTime(limitDate);
-
         return limitCalendar.get(Calendar.DAY_OF_MONTH);
-
     }
 }

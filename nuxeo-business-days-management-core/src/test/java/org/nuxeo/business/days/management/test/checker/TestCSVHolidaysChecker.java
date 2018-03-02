@@ -26,36 +26,30 @@ import static org.junit.Assert.assertTrue;
 import java.text.ParseException;
 
 import org.apache.commons.lang3.time.FastDateFormat;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.nuxeo.business.days.management.checker.CSVHolidaysChecker;
-import org.nuxeo.runtime.test.NXRuntimeTestCase;
+import org.nuxeo.runtime.test.runner.Deploy;
+import org.nuxeo.runtime.test.runner.Features;
+import org.nuxeo.runtime.test.runner.FeaturesRunner;
+import org.nuxeo.runtime.test.runner.RuntimeFeature;
 
 /**
  * @author Nicolas Ulrich
  */
-public class TestCSVHolidaysChecker extends NXRuntimeTestCase {
-
-    @Before
-    public void setUp() throws Exception {
-
-        super.setUp();
-
-        deployBundle("org.nuxeo.business.days.management.api");
-        deployBundle("org.nuxeo.business.days.management.core");
-        deployBundle("org.nuxeo.business.days.management.core.test");
-
-    }
+@RunWith(FeaturesRunner.class)
+@Features(RuntimeFeature.class)
+@Deploy("org.nuxeo.business.days.management.api")
+@Deploy("org.nuxeo.business.days.management.core")
+@Deploy("org.nuxeo.business.days.management.core.test")
+public class TestCSVHolidaysChecker {
 
     @Test
     public void testLabel() throws ParseException {
-
         FastDateFormat formater = FastDateFormat.getInstance("dd/MM/yyyy");
-
         CSVHolidaysChecker check = new CSVHolidaysChecker();
         assertTrue(check.isHoliday(formater.parse("12/01/2010")));
         assertFalse(check.isHoliday(formater.parse("13/01/2010")));
         assertTrue(check.isHoliday(formater.parse("14/01/2010")));
-
     }
 }
