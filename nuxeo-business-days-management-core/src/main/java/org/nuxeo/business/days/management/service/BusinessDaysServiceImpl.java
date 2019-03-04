@@ -90,7 +90,7 @@ public class BusinessDaysServiceImpl extends DefaultComponent implements Busines
 
             HolidaysCheckerDescriptor distributionType = ((HolidaysCheckerDescriptor) contribution);
             try {
-                check = (HolidaysChecker) Class.forName(distributionType.clazz).newInstance();
+                check = (HolidaysChecker) Class.forName(distributionType.clazz).getDeclaredConstructor().newInstance();
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
